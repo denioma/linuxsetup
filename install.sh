@@ -1,5 +1,12 @@
 #!/bin/bash
 
+ID_LIKE=`cat /etc/os-release | egrep "^ID_LIKE=\w+" | cut -c 9-`
+
+if [[ $ID_LIKE != *"debian"* ]]; then
+    echo "This script is meant for Ubuntu only (so far!)"
+    exit 1
+fi
+
 # Install apt packages
 sudo xargs -a packages.txt apt install
 
